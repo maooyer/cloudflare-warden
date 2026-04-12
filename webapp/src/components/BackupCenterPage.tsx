@@ -242,6 +242,10 @@ export default function BackupCenterPage(props: BackupCenterPageProps) {
             : null)
           || getFirstVisibleDestinationId(loaded);
         setSelectedDestinationId(nextSelectedDestinationId);
+        if (nextSelectedDestinationId) {
+          const path = persistedRemoteState.pathByDestination[nextSelectedDestinationId] || '';
+          void loadRemoteBrowser(nextSelectedDestinationId, path, { force: true });
+        }
         setLocalError('');
       })
       .catch((error) => {
